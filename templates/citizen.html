@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Grievance Intelligence</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="navbar-inner">
+
+            <div class="brand">
+                <div class="brand-mark">GI</div>
+
+                <div>
+                    <div class="brand-name">
+                        Grievance Intelligence
+                    </div>
+
+                    <div class="brand-subtitle">
+                        Citizen Service Assistant
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="nav-link">
+                Track Complaint
+            </a>
+
+        </div>
+    </header>
+
+
+    <main class="page">
+
+        <section class="hero">
+
+            <span class="eyebrow">
+                AI-assisted public service
+            </span>
+
+            <h1>
+                Report your grievance in your own words.
+            </h1>
+
+            <p>
+                Describe what happened. Our system will organize the
+                information to help make your grievance easier to review.
+            </p>
+
+        </section>
+
+
+        <div class="content-grid">
+
+            <section class="card form-card">
+
+                <div class="card-header">
+
+                    <h2>
+                        Submit a grievance
+                    </h2>
+
+                    <p>
+                        Provide the details below. You can describe the
+                        problem naturally.
+                    </p>
+
+                </div>
+
+
+                <form method="POST" action="/analyze">
+
+                    <div class="field">
+
+                        <label for="complaint">
+                            Describe your grievance
+                            <span class="required">*</span>
+                        </label>
+
+                        <textarea
+                            id="complaint"
+                            name="complaint"
+                            placeholder="Example: Hamare ward 12 mein 5 din se paani nahi aa raha..."
+                            required
+                        ></textarea>
+
+                        <div class="helper">
+                            You can write in Hindi, English or mixed language.
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="field">
+
+                            <label for="district">
+                                District
+                            </label>
+
+                            <input
+                                type="text"
+                                id="district"
+                                name="district"
+                                placeholder="Enter district"
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="ward">
+                                Ward / Area
+                            </label>
+
+                            <input
+                                type="text"
+                                id="ward"
+                                name="ward"
+                                placeholder="Enter ward or area"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit" class="submit-btn">
+                        Analyze My Grievance
+                    </button>
+
+
+                    <div class="trust-note">
+                        AI provides assistance only. Final government
+                        actions remain with authorized officials.
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <aside class="card side-card">
+
+                <h3>
+                    How it works
+                </h3>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        1
+                    </div>
+
+                    <div>
+                        <h4>
+                            Describe
+                        </h4>
+
+                        <p>
+                            Explain your problem in natural language.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        2
+                    </div>
+
+                    <div>
+                        <h4>
+                            AI understands
+                        </h4>
+
+                        <p>
+                            Important information is extracted and organized.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        3
+                    </div>
+
+                    <div>
+                        <h4>
+                            Human review
+                        </h4>
+
+                        <p>
+                            AI recommendations are reviewed by responsible
+                            officials.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Built for transparency
+                    </strong>
+
+                    <p>
+                        The system is designed to explain what it understood
+                        rather than silently making decisions.
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <footer class="footer">
+        AI Grievance Intelligence • Hackathon Prototype
+    </footer>
+
+</body>
+</html>

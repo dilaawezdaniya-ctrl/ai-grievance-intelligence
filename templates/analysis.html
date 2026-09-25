@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Grievance Analysis</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="navbar-inner">
+
+        <div class="brand">
+            <div class="brand-mark">GI</div>
+
+            <div>
+                <div class="brand-name">
+                    Grievance Intelligence
+                </div>
+
+                <div class="brand-subtitle">
+                    Citizen Service Assistant
+                </div>
+            </div>
+        </div>
+
+        <a href="/" class="nav-link">
+            New Complaint
+        </a>
+
+    </div>
+</header>
+
+
+<main class="page">
+
+    <section class="hero">
+
+        <span class="eyebrow">
+            AI understanding
+        </span>
+
+        <h1>
+            Here's what we understood.
+        </h1>
+
+        <p>
+            Please review the information below before continuing.
+            You remain in control of what is submitted.
+        </p>
+
+    </section>
+
+
+    <div class="card form-card">
+
+        <div class="card-header">
+
+            <h2>
+                Complaint understanding
+            </h2>
+
+            <p>
+                AI-generated information based on the complaint you provided.
+            </p>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="field">
+                <label>Issue</label>
+                <input type="text" value="{{ analysis.issue }}" readonly>
+            </div>
+
+            <div class="field">
+                <label>Category</label>
+                <input type="text" value="{{ analysis.category }}" readonly>
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="field">
+                <label>Location</label>
+                <input type="text" value="{{ analysis.location }}" readonly>
+            </div>
+
+            <div class="field">
+                <label>Duration</label>
+                <input type="text" value="{{ analysis.duration }}" readonly>
+            </div>
+
+        </div>
+
+
+        <div class="field">
+            <label>Suggested Department</label>
+            <input
+                type="text"
+                value="{{ analysis.department }}"
+                readonly
+            >
+        </div>
+
+
+        <div class="field">
+            <label>AI Summary</label>
+
+            <textarea readonly>{{ analysis.summary }}</textarea>
+        </div>
+
+
+        <div class="trust-note">
+            This is an AI-assisted interpretation. Please review the
+            information before continuing.
+        </div>
+
+
+        <div style="display: flex; gap: 12px; margin-top: 20px;">
+
+            <a href="/" style="
+                flex: 1;
+                text-align: center;
+                text-decoration: none;
+                padding: 14px;
+                border-radius: 12px;
+                border: 1px solid #d0d5dd;
+                color: #344054;
+                font-weight: 700;
+            ">
+                Edit Complaint
+            </a>
+
+            <button
+                type="button"
+                class="submit-btn"
+                style="flex: 1; margin-top: 0;"
+                onclick="alert('Next step: complaint submission')"
+            >
+                Yes, Continue
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+    AI Grievance Intelligence • Hackathon Prototype
+</footer>
+
+</body>
+</html>
