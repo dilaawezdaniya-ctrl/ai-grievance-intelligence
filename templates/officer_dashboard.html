@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Officer Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="navbar-inner">
+
+            <div class="brand">
+                <div class="brand-mark">GI</div>
+
+                <div>
+                    <div class="brand-name">
+                        Grievance Intelligence
+                    </div>
+
+                    <div class="brand-subtitle">
+                        Officer Copilot
+                    </div>
+                </div>
+            </div>
+
+            <a href="/" class="nav-link">
+                Citizen View
+            </a>
+
+        </div>
+    </header>
+
+
+    <main class="page">
+
+        <section class="hero">
+
+            <span class="eyebrow">
+                Officer intelligence dashboard
+            </span>
+
+            <h1>
+                Understand what is happening across grievances.
+            </h1>
+
+            <p>
+                AI-assisted signals help officers identify related
+                complaints and potential emerging patterns for human review.
+            </p>
+
+        </section>
+
+
+        <div class="content-grid">
+
+            <section class="card form-card">
+
+                <div class="card-header">
+                    <h2>
+                        Grievance Overview
+                    </h2>
+
+                    <p>
+                        Current information from the prototype database.
+                    </p>
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="info-box">
+                        <strong>Total complaints</strong>
+                        <p>{{ total_complaints }}</p>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Active clusters</strong>
+                        <p>{{ cluster_count }}</p>
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+                    <strong>Potential emerging signals</strong>
+                    <p>{{ emerging_count }}</p>
+                </div>
+
+
+                <div class="trust-note">
+                    Prototype data includes clearly labelled synthetic
+                    demonstration records. AI signals are for human review
+                    and are not confirmed government findings.
+                </div>
+
+            </section>
+
+
+            <aside class="card side-card">
+
+                <h3>
+                    Potential Emerging Issues
+                </h3>
+
+
+                {% if emerging_issues %}
+
+                    {% for signal in emerging_issues %}
+
+                        <div class="info-box">
+
+                            <strong>
+                                ⚠ Potential Emerging Pattern
+                            </strong>
+
+                            <p>
+                                <strong>Category:</strong>
+                                {{ signal.category }}
+                            </p>
+
+                            <p>
+                                <strong>Location:</strong>
+                                {{ signal.location }}
+                            </p>
+
+                            <p>
+                                <strong>Recent complaints:</strong>
+                                {{ signal.recent_count }}
+                            </p>
+
+                            <p>
+                                <strong>Previous period:</strong>
+                                {{ signal.previous_count }}
+                            </p>
+
+                            {% if signal.increase_percent is not none %}
+
+                                <p>
+                                    <strong>Increase:</strong>
+                                    {{ signal.increase_percent }}%
+                                </p>
+
+                            {% endif %}
+
+                            <p>
+                                <strong>Status:</strong>
+                                {{ signal.status }}
+                            </p>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="info-box">
+
+                        <strong>
+                            No potential emerging issues
+                        </strong>
+
+                        <p>
+                            No current signal crossed the prototype detection
+                            thresholds.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </aside>
+
+        </div>
+
+
+        <section class="card form-card" style="margin-top: 24px;">
+
+            <div class="card-header">
+
+                <h2>
+                    Issue Clusters
+                </h2>
+
+                <p>
+                    Groups of semantically related complaints.
+                </p>
+
+            </div>
+
+
+            {% if clusters %}
+
+                {% for cluster in clusters %}
+
+                    <div class="info-box">
+
+                        <strong>
+                            Cluster #{{ cluster.cluster_id }}
+                        </strong>
+
+                        <p>
+                            <strong>Category:</strong>
+                            {{ cluster.category }}
+                        </p>
+
+                        <p>
+                            <strong>Location:</strong>
+                            {{ cluster.location }}
+                        </p>
+
+                        <p>
+                            <strong>Complaints:</strong>
+                            {{ cluster.complaint_count }}
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="info-box">
+
+                    <strong>
+                        No clusters available
+                    </strong>
+
+                    <p>
+                        More complaint data is needed for clustering.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <section class="card form-card" style="margin-top: 24px;">
+
+            <div class="card-header">
+
+                <h2>
+                    Recent Complaints
+                </h2>
+
+                <p>
+                    Open a complaint to inspect its AI-assisted intelligence.
+                </p>
+
+            </div>
+
+
+            {% if recent_complaints %}
+
+                {% for complaint in recent_complaints %}
+
+                    <div class="info-box">
+
+                        <strong>
+                            Complaint #{{ complaint.id }}
+                        </strong>
+
+                        <p>
+                            {{ complaint.complaint_text }}
+                        </p>
+
+                        <p>
+                            {{ complaint.category or "Uncategorized" }}
+                            •
+                            {{ complaint.location or "Location not specified" }}
+                        </p>
+
+                        <a
+                            href="/officer/complaint/{{ complaint.id }}"
+                            style="
+                                display: inline-block;
+                                margin-top: 8px;
+                                color: #1d4ed8;
+                                font-weight: 700;
+                                text-decoration: none;
+                            "
+                        >
+                            Open Officer Intelligence →
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="info-box">
+                    <strong>No complaints available</strong>
+                    <p>Submit a complaint to populate the dashboard.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+        AI Grievance Intelligence • Officer Copilot • Prototype
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Officer Intelligence</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="navbar-inner">
+
+            <div class="brand">
+
+                <div class="brand-mark">
+                    GI
+                </div>
+
+                <div>
+
+                    <div class="brand-name">
+                        Grievance Intelligence
+                    </div>
+
+                    <div class="brand-subtitle">
+                        Officer Copilot
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div style="display: flex; gap: 18px; align-items: center;">
+
+                <a href="/officer" class="nav-link">
+                    Officer Dashboard
+                </a>
+
+                <a href="/" class="nav-link">
+                    Citizen View
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="page">
+
+        <section class="hero">
+
+            <span class="eyebrow">
+                Officer intelligence
+            </span>
+
+            <h1>
+                Review complaint intelligence.
+            </h1>
+
+            <p>
+                AI-assisted context helps officers investigate related
+                complaints while keeping the final decision with the
+                responsible official.
+            </p>
+
+        </section>
+
+
+        <div class="content-grid">
+
+
+            <!-- Complaint Information -->
+
+            <section class="card form-card">
+
+                <div class="card-header">
+
+                    <h2>
+                        Complaint #{{ complaint.id }}
+                    </h2>
+
+                    <p>
+                        Current status:
+                        <strong>{{ complaint.status }}</strong>
+                    </p>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Original Complaint
+                    </label>
+
+                    <textarea readonly>{{ complaint.complaint_text }}</textarea>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="field">
+
+                        <label>
+                            Issue
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ complaint.issue }}"
+                            readonly
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ complaint.category }}"
+                            readonly
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="field">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ complaint.location }}"
+                            readonly
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Duration
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ complaint.duration }}"
+                            readonly
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Suggested Department
+                    </label>
+
+                    <input
+                        type="text"
+                        value="{{ complaint.department }}"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        AI Summary
+                    </label>
+
+                    <textarea readonly>{{ complaint.summary }}</textarea>
+
+                </div>
+
+
+                <div class="trust-note">
+
+                    AI-generated information is decision support.
+                    The responsible officer remains accountable for
+                    the final action.
+
+                </div>
+
+            </section>
+
+
+            <!-- Similar Complaints -->
+
+            <aside class="card side-card">
+
+                <h3>
+                    Potentially Related Complaints
+                </h3>
+
+
+                {% if similar_complaints %}
+
+                    {% for item in similar_complaints %}
+
+                        <div class="info-box">
+
+                            <strong>
+                                {{ item.similarity_percentage }}% similar
+                            </strong>
+
+                            <p>
+                                Complaint #{{ item.complaint_id }}
+                            </p>
+
+                            <p>
+                                {{ item.complaint_text }}
+                            </p>
+
+                            <p>
+                                {{ item.category or "Uncategorized" }}
+                                •
+                                {{ item.location or "Location not specified" }}
+                            </p>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="info-box">
+
+                        <strong>
+                            No potentially related complaints found
+                        </strong>
+
+                        <p>
+                            No stored complaints crossed the current
+                            similarity threshold.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <footer class="footer">
+        AI Grievance Intelligence • Officer Copilot • Prototype
+    </footer>
+
+</body>
+</html>
